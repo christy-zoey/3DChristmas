@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>2</title>
+</head>
+<body>
+<div style="height:250px; width: 250px;" id="three"></div>
+
+	<!-- <script src="js/three.js"></script>
+	<script src="js/GLTFLoader.js"></script>
+	<script src="js/OrbitControls.js"></script>
+	<script src="js/Script.js"></script> -->
+<script type="module">
+	import * as THREE from './three/build/three.module.js';
+	import { OrbitControls } from './three/examples/jsm/controls/OrbitControls.js';
+	import { GLTFLoader } from './three/examples/jsm/loaders/GLTFLoader.js';
+//  var div = document.getElementById('three');
+	var scene = new THREE.Scene();
+
+	var camera = new THREE.PerspectiveCamera( 100, window.innerWidth / window.innerHeight, 0.1, 100 );
+  camera.position.z = 5;
+  var light = new THREE.HemisphereLight( 0xffffff, 0x444444 );
+  light.position.set( 1, 1, 1 );
+  scene.add( light );
+
+  var object = new THREE.Object3D();
+  scene.add( object );
+
+	var renderer = new THREE.WebGLRenderer();
+	// renderer.gammaOutput = true;
+	// renderer.gammaFactor = 2.2;
+	// texture.encoding = THREE.sRGBEncoding;
+	renderer = new THREE.WebGLRenderer( { antialias: true,alpha:true } );
+	renderer.setClearColor(0xEEEEEE, 0.0);
+	renderer.setSize( window.innerWidth, window.innerHeight );
+	document.body.appendChild( renderer.domElement );
+
+	var geometry = new THREE.BoxGeometry( 1, 1, 1 );
+	var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+	var cube = new THREE.Mesh( geometry, material );
+	console.log(cube)
+	// scene.add( cube );
+
+	function animate() {
+		requestAnimationFrame( animate );
+		cube.rotation.x += 0.01;
+		cube.rotation.y += 0.01;
+		renderer.render( scene, camera );
+	}
+	animate();
+
+		const loader = new GLTFLoader();
+	console.log(loader)
+	loader.load(
+	    'source/scene.gltf',
+	    ( gltf ) => {
+	    	 gltf.scene.traverse( function ( child ) {
+            	if ( child.isMesh ) {
+                    child.material.emissive =  child.material.color;
+					child.material.emissiveMap = child.material.map ;
+            	}
+           if (child instanceof THREE.Mesh) {
+             child.castShadow = true;
+             child.receiveShadow = true;
+           }
+            } );
+	        // called when the resource is loaded
+	        console.log(gltf)
+	        scene.add( gltf.scene );
+	    },
+	    ( xhr ) => {
+	        // called while loading is progressing
+	        console.log( `${( xhr.loaded / xhr.total * 100 )}% loaded` );
+	    },
+	    ( error ) => {
+	        // called when loading has errors
+	        console.error( 'An error happened', error );
+	    },
+	);
+</script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="utf-8">
+  <title>car</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no">
+  <meta name="format-detection" content="telephone=no">
+  <meta http-equiv="x-dns-prefetch-control" content="on">
+  <link rel="dns-prefetch" href="//img10.360buyimg.com">
+  <link rel="dns-prefetch" href="//img11.360buyimg.com">
+  <link rel="dns-prefetch" href="//img12.360buyimg.com">
+  <link rel="dns-prefetch" href="//img13.360buyimg.com">
+  <link rel="dns-prefetch" href="//img14.360buyimg.com">
+  <link rel="dns-prefetch" href="//img20.360buyimg.com">
+  <link rel="dns-prefetch" href="//img30.360buyimg.com">
+  <link rel="dns-prefetch" href="//wq.360buyimg.com">
+
+  <!-- S 引用前端页面片 -->
+  <!-- #include virtual="/demo/car.shtml" -->
+<link rel="stylesheet" href="css/car.min_cfbdab1c.css" />
+  <!-- E 引用前端页面片 -->
+
+</head>
+<!-- 注：加ontouchstart使css：active生效 -->
+
+<body ontouchstart="">
+
+  <div class="wrapper">
+    <canvas id="gameView" width="750" height="2688" class="car_gameView">
+        您的浏览器版本过低，请更换更高版本的浏览器
+      </canvas>
+  </div>
+
+  <!-- S 引用前端页面片 -->
+  <!-- #include virtual="/demo/car_js.shtml" -->
+<script src="js/easeljs-0.8.1.min_5065b749.js"></script>
+<script src="js/preloadjs-0.6.2.min_d7b96570.js"></script>
+<script src="js/car.min_c1cfcd1a.js"></script>
+  <!-- E 引用前端页面片 -->
+  <!-- global:js -->
+  <!-- endglobal -->
+
+  <script>
+    //静态资源
+    var manifest = [{
+        src: 'images/car_3@2x_b3fa2ed2.png',
+        id: 'car'
+      },
+      {
+        src: 'images/car_bg_1@2x_0d451cef.jpg',
+        id: 'bg1'
+      }
+    ];
+    //总的倒计时时间， allTime  30
+    // 道具作用的里程数  propMill 300
+    // 默认加速值  fixM 20
+    var game = new CarGame(30, 300, 20);
+    game.init(manifest);
+  </script>
+
+</body>
+
+</html>

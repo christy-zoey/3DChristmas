@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  if (typeof doyoo == 'undefined' || !doyoo) {
+    var d_genId = function () {
+      var id = '', ids = '0123456789abcdef';
+      for (var
+             i = 0; i < 32; i++) {
+        id += ids.charAt(Math.floor(Math.random() * 16));
+      }
+      return id;
+    };
+    var schema = 'http';
+    if (location.href.indexOf('https:') == 0) {
+      schema = 'https';
+    }
+    var doyoo = {
+      env: {
+        secure: schema == 'https',
+        mon: schema + '://m9104.talk99.cn/monitor',
+        chat: schema + '://chat7122a.talk99.cn/chat',
+        file: schema + '://aux.soperson.com/131221',
+        compId: 20000773,
+        confId: 10104054,
+        workDomain: '',
+        vId: d_genId(),
+        lang: '',
+        fixFlash: 0,
+        fixMobileScale: 0,
+        subComp: 35529,
+        _mark: '54ba23e51b7f858540090991d12fb0dbdbce18d2d1d498855ffb00d29e533df1646af738c03fbf96'
+      },
+      chat: {
+        mobileColor: '',
+        mobileHeight: 80,
+        mobileChatHintBottom: 0,
+        mobileChatHintMode: 0,
+        mobileChatHintColor: '',
+        mobileChatHintSize: 0,
+        priorMiniChat: 0
+      }
+    };
+    if (typeof talk99Init == 'function') {
+      talk99Init(doyoo);
+    }
+    if (!document.getElementById('doyoo_panel')) {
+      var supportJquery = typeof jQuery != 'undefined';
+      var doyooWrite = function (html) {
+        document.writeln(html);
+      }
+      doyooWrite('');
+      doyooWrite('');
+      doyooWrite('');
+      doyooWrite('');
+      doyooWrite('');
+      doyooWrite('');
+    }
+  }
+</script>
+</body>
+</html>
